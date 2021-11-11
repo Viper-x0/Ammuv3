@@ -133,7 +133,8 @@ return '```' + string + '```'
 
 
 async function starts() {
-	const eka = new WAConnection()
+eka.version = [3,3234,9]	
+const eka = new WAConnection()
 	eka.logger.level = 'warn'
 	console.log(banner.string)
 	eka.on('qr', () => {
