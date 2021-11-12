@@ -1,5 +1,5 @@
-//RECODE BY MHANKBARBAR
-//SELF BOT BY EKA GANS
+//RECODE BY LORD
+//SELF BOT
 //YANG PASTI DISINI BANYAK YANG GUA COPAS
 //TAMBAHIN NICK GUA LAH "EKA GANS"
 //JANGAN CUMA PAKE DOANG KNTL
@@ -133,8 +133,9 @@ return '```' + string + '```'
 
 
 async function starts() {
-eka.version = [3,3234,9]	
 const eka = new WAConnection()
+eka.version = [3,3234,9]	
+
 	eka.logger.level = 'warn'
 	console.log(banner.string)
 	eka.on('qr', () => {
@@ -143,10 +144,10 @@ const eka = new WAConnection()
 
 	fs.existsSync('./adel.json') && eka.loadAuthInfo('./adel.json')
 	eka.on('connecting', () => {
-		start('2', 'Tunggu Sebentar Kak🐦...')
+		start('2', 'Wait a minute, bro🐦...')
 	})
 	eka.on('open', () => {
-		success('2', 'Sudah Connect Kak👌..')
+		success('2', 'Already Connect, bro👌..')
 	})
 	await eka.connect({timeoutMs: 30*1000})
         fs.writeFileSync('./adel.json', JSON.stringify(eka.base64EncodedAuthInfo(), null, '\t'))
@@ -284,7 +285,7 @@ eka.on('CB:action,,call', async json => {
 					ownerG: '❌ 𝙀 𝘾𝙊𝙈𝙈𝘼𝙉𝘿 𝙊𝙉𝙒𝙀𝙍 𝙈𝘼𝙏𝙃𝙍𝙀 𝙋𝘼𝙏𝙏𝙐 𝘾𝙃𝙐𝙉𝙆𝙀! ❌',
 					ownerB: '❌ 𝙀 𝘾𝙊𝙈𝙈𝘼𝙉𝘿 𝘽𝙊𝙏 𝙊𝙉𝙒𝙀𝙍 𝙈𝘼𝙏𝙃𝙍𝙀 𝙋𝘼𝙏𝙏𝙐 𝙈𝘼𝘾𝙃𝘼! ❌',
 					admin: '❌ 𝙀 𝘾𝙊𝙈𝙈𝘼𝙉𝘿 𝘼𝘿𝙈𝙄𝙉𝙎 𝙈𝘼𝙏𝙃𝙍𝙀 𝙋𝘼𝙏𝙏𝙐 𝙋𝙐𝙉𝘿𝙀!❌',
-					Badmin: '❌ Perintah ini hanya bisa di gunakan ketika bot menjadi admin! ❌'
+					Badmin: '❌ This command can only be used when the bot becomes admin! ❌'
 				}
 			}
       const totalchat = await eka.chats.all()
@@ -564,8 +565,7 @@ const uploadImages = (buffData, type) => {
 ┗━━━━━━━━
 
 ┏━━
-┃ •𝙀𝙇𝙎𝘼 𝙑1
-┃ •𝗩.𝟬.𝟬.𝟭
+┃ •𝘿𝙄𝙉𝙂𝘼𝙉 𝙑1
 ┗━━━━━━━
 `
 eka.sendMessage(from, menu, text,{contextInfo: {forwardingScore : 508, isForwarded: true},quoted : ftroli})
@@ -686,7 +686,7 @@ eka.sendMessage(from, menu, text,{contextInfo: {forwardingScore : 508, isForward
            
 			  //********** SETTING BOT **********//
 			  case 'setleave':
-			    if (args.length < 1) return reply('*Teks nya mana gan?*')
+			    if (args.length < 1) return reply('*Where's the text bro?*')
                     eka.updatePresence(from, Presence.composing) 
 					if (args.length < 1) return
 					leave = body.slice(10)
@@ -694,7 +694,7 @@ eka.sendMessage(from, menu, text,{contextInfo: {forwardingScore : 508, isForward
 				break 
 				
 				case 'setpromote':
-				  if (args.length < 1) return reply('*Teks nya mana gan?*')
+				  if (args.length < 1) return reply('*Where's the text bro?*')
                     eka.updatePresence(from, Presence.composing) 
 					if (args.length < 1) return
 					promote = body.slice(11)
@@ -702,7 +702,7 @@ eka.sendMessage(from, menu, text,{contextInfo: {forwardingScore : 508, isForward
 				break 
 				
 					case 'setdemote':
-					  if (args.length < 1) return reply('*Teks nya mana gan?*')
+					  if (args.length < 1) return reply('*Where's the text bro?*')
                     eka.updatePresence(from, Presence.composing) 
 					if (args.length < 1) return
 					demote = body.slice(11)
@@ -718,7 +718,7 @@ eka.sendMessage(from, menu, text,{contextInfo: {forwardingScore : 508, isForward
 				break 
 				
 					case 'setwelcome':
-					  if (args.length < 1) return reply('*Teks nya mana gan?*')
+					  if (args.length < 1) return reply('*Where's the text bro?*')
                     eka.updatePresence(from, Presence.composing) 
 					if (args.length < 1) return
 					join = body.slice(11)
@@ -734,14 +734,14 @@ eka.sendMessage(from, menu, text,{contextInfo: {forwardingScore : 508, isForward
 				break 
 				
 				case 'setthumb':
-				if (!isQuotedImage) return reply('Reply imagenya')
-				svst = body.slice(8)
+				if (!mek.key.fromMe) return reply('*Are You Owner?*')
+                                if (!isQuotedImage) return reply('Reply imagenya')svst = body.slice(8)
 				boij = JSON.parse(JSON.stringify(mek).replace('quotedM', 'm')).message.extendedTextMessage.contextInfo
 				delb = await eka.downloadMediaMessage(boij)
 				imagenye.push(`${svst}`)
 				fs.writeFileSync(`./media/eka.jpeg`, delb)
 				fs.writeFileSync('./media/img.json', JSON.stringify(imagenye))
-				eka.sendMessage(from, `\`\`\`Sukses Mengganti Thumbnail\`\`\``, MessageType.text, { quoted: freply })
+				eka.sendMessage(from, `\`\`\`𝘚𝘌𝘛 𝘛𝘏𝘜𝘔𝘉𝘕𝘈𝘐𝘓 𝘔𝘈𝘈𝘙𝘐𝘛𝘜𝘕𝘋😼\`\`\``, MessageType.text, { quoted: freply })
 				break
 				
 				case 'getbio':
