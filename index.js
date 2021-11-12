@@ -1514,7 +1514,61 @@ case 'getvn':
 				teks += `\n*Total : ${audionye.length}*`
 				eka.sendMessage(from, teks.trim(), extendedText, { quoted: freply, contextInfo: { "mentionedJid": audionye } })
 				break
-				
+
+//********** DOWNLOAD **********//
+					
+					case 'ytsearch': 
+                    if (args.length == 0) return reply(`Example: ${prefix + command} Melukis Senja`)
+                    query = args.join(" ")
+                    get_result = await fetchJson(`https://api.lolhuman.xyz/api/ytsearch?apikey=${LolKey}&query=${query}`)
+                    get_result = get_result.result
+                    ini_txt = ""
+                    for (var x of get_result) {
+                        ini_txt += `Title : ${x.title}\n`
+                        ini_txt += `Views : ${x.views}\n`
+                        ini_txt += `Published : ${x.published}\n`
+                        ini_txt += `Thumbnail : ${x.thumbnail}\n`
+                        ini_txt += `Link : https://www.youtube.com/watch?v=${x.videoId}\n\n`
+                    }
+                    reply(ini_txt)
+                    break
+					
+					case 'ytmp4':  
+                    if (args.length == 0) return reply(`Example: ${prefix + command} https://www.youtube.com/watch?v=qZIQAk-BUEc`)
+                    ini_link = args[0]
+                    get_result = await fetchJson(`https://api.lolhuman.xyz/api/ytvideo?apikey=${LolKey}&url=${ini_link}`)
+                    get_result = get_result.result
+                    ini_txt = `Title : ${get_result.title}\n`
+                    ini_txt += `Uploader : ${get_result.uploader}\n`
+                    ini_txt += `Duration : ${get_result.duration}\n`
+                    ini_txt += `View : ${get_result.view}\n`
+                    ini_txt += `Like : ${get_result.like}\n`
+                    ini_txt += `Dislike : ${get_result.dislike}\n`
+                    ini_txt += `Description :\n ${get_result.description}`
+                    ini_buffer = await getBuffer(get_result.thumbnail)
+                    xynn.sendMessage(from, ini_buffer, image, { quoted: freply, caption: ini_txt })
+                    get_audio = await getBuffer(get_result.link[0].link)
+                    xynn.sendMessage(from, get_audio, video, { mimetype: 'video/mp4', filename: `${get_result.title}.mp4`, quoted: freply})
+                    break
+                    
+                    case 'ytmp3':  
+                    if (args.length == 0) return reply(`Example: ${prefix + command} https://www.youtube.com/watch?v=qZIQAk-BUEc`)
+                    ini_link = args[0]
+                    get_result = await fetchJson(`https://api.lolhuman.xyz/api/ytaudio?apikey=${LolKey}&url=${ini_link}`)
+                    get_result = get_result.result
+                    ini_txt = `Title : ${get_result.title}\n`
+                    ini_txt += `Uploader : ${get_result.uploader}\n`
+                    ini_txt += `Duration : ${get_result.duration}\n`
+                    ini_txt += `View : ${get_result.view}\n`
+                    ini_txt += `Like : ${get_result.like}\n`
+                    ini_txt += `Dislike : ${get_result.dislike}\n`
+                    ini_txt += `Description :\n ${get_result.description}`
+                    ini_buffer = await getBuffer(get_result.thumbnail)
+                    xynn.sendMessage(from, ini_buffer, image, { quoted: freply, caption: ini_txt })
+                    get_audio = await getBuffer(get_result.link[3].link)
+                    xynn.sendMessage(from, get_audio, audio, { mimetype: 'audio/mp4', filename: `${get_result.title}.mp3`, quoted: freply})
+                    break				
+
 //********** UPLOAD **********
 case 'upswtext':
 					eka.updatePresence(from, Presence.composing)
