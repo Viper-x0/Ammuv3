@@ -686,7 +686,7 @@ eka.sendMessage(from, menu, text,{contextInfo: {forwardingScore : 508, isForward
            
 			  //********** SETTING BOT **********//
 			  case 'setleave':
-			    if (args.length < 1) return reply('*Where's the text bro?*')
+			    if (args.length < 1) return reply('*Wheres the text bro?*')
                     eka.updatePresence(from, Presence.composing) 
 					if (args.length < 1) return
 					leave = body.slice(10)
@@ -694,15 +694,37 @@ eka.sendMessage(from, menu, text,{contextInfo: {forwardingScore : 508, isForward
 				break 
 				
 				case 'setpromote':
-				  if (args.length < 1) return reply('*Where's the text bro?*')
+				  if (args.length < 1) return reply('*Wheres the text bro?*')
                     eka.updatePresence(from, Presence.composing) 
 					if (args.length < 1) return
 					promote = body.slice(11)
 					eka.sendMessage(from,`\`\`\`Promote berhasil di ubah menjadi : ${body.slice(11)}\`\`\``, text,{quoted : freply})
 				break 
-				
+
+				case 'play':
+                            if (args.length === 0) return reply(`Send orders *${prefix}play* __The title of the song to be searched_`)
+                            const playy = await axios.get(`https://bx-hunter.herokuapp.com/api/yt/search?query=${body.slice(6)}&apikey=${HunterApi}`)
+                            const mulaikah = playy.data.result[0].url
+                            try {
+                                reply(mess.wait)
+                                yta(mulaikah)
+                                .then((res) => {
+                                    const { dl_link, thumb, title, filesizeF, filesize } = res
+                                    axios.get(`https://tinyurl.com/api-create.php?url=${dl_link}`)
+                                    .then(async (a) => {
+                                    if (Number(filesize) >= 30000) return sendMediaURL(from, thumb, `❏ *𝙿𝙻𝙰𝚈𝙼𝙿3*\n\n❏ *𝚃𝙸𝚃𝙻𝙴* : ${title}\n❏ *𝙴𝚇𝚃* : MP3\n*Filesize* : ${filesizeF}\n*𝙻𝙸𝙽𝙺* : ${a.data}\n\n_Sorry the duration exceeds the maximum limit, please click the link above_`)
+                                    const captions = `❏ *𝚈𝚃𝚖𝚙3*\n\n❏ *𝚃𝙸𝚃𝙻𝙴* : ${title}\n❏ *𝙴𝚇𝚃* : MP3\n❏ *𝚂𝙸𝚉𝙴* : ${filesizeF}\n❏ *𝚂𝙴𝚁𝚅𝙴𝚁* : 𝚈𝚃𝙼𝙿3, _𝚆𝙰𝙸𝚃 𝙰 𝙼𝙸𝙽𝚄𝚃𝙴_`
+								    sendMediaURL(from, thumb, captions)
+                                    sendMediaURL(from, dl_link).catch(() => reply(mess.error.api))
+                                    })
+                                })
+                            } catch (err) {
+                                reply(mess.error.api)
+                            }
+                            break
+
 					case 'setdemote':
-					  if (args.length < 1) return reply('*Where's the text bro?*')
+					  if (args.length < 1) return reply('*Wheres the text bro?*')
                     eka.updatePresence(from, Presence.composing) 
 					if (args.length < 1) return
 					demote = body.slice(11)
@@ -718,7 +740,7 @@ eka.sendMessage(from, menu, text,{contextInfo: {forwardingScore : 508, isForward
 				break 
 				
 					case 'setwelcome':
-					  if (args.length < 1) return reply('*Where's the text bro?*')
+					  if (args.length < 1) return reply('*Wheres the text bro?*')
                     eka.updatePresence(from, Presence.composing) 
 					if (args.length < 1) return
 					join = body.slice(11)
